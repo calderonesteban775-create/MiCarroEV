@@ -11,7 +11,14 @@ for key, value in {"pagina": "Necesidades", "presupuesto": 150000000, "pasajeros
         st.session_state[key] = value
 
 paginas = ["Necesidades", "Alternativas", "Comparar", "Favoritos"]
-pagina = st.radio("Navegación", paginas, horizontal=True, key="pagina")
+pagina = st.radio(
+    "Navegación",
+    paginas,
+    horizontal=True,
+    index=paginas.index(st.session_state["pagina"])
+)
+
+st.session_state["pagina"] = pagina
 
 try:
     catalogo, alertas = cargar_catalogo("datos/vehiculos_ev_hibridos_colombia.xlsx")
